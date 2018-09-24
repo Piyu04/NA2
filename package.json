@@ -12,7 +12,12 @@
   "dependencies": {
     "body-parser": "^1.18.3",
     "express": "^4.16.3",
+    "express-generator": "^4.16.0",
     "jade": "^1.11.0",
-    "mongoose": "^5.2.14"
+    "mailin": "^3.0.4",
+    "mongoose": "^5.2.14",
+    "ngrok": "^3.0.1",
+    "nodemailer": "^4.6.8",
+    "openssl": "^1.1.0"
   }
 }

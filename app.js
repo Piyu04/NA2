@@ -1,7 +1,13 @@
 const express = require('express');
-var app = express();
-var port = 2200;
+const fs = require('fs');
+const https = require('https');
+const path = require('path');
+const port = 2200;
+const nodemailer = require('nodemailer');
 
+var app = express();
+
+//body-parser
 var bodyParser = require('body-parser');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
@@ -10,13 +16,15 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.set('views',__dirname+'/views');
 app.set('view engine' ,'jade');
 
+
 // mongoose connection
 var mongoose = require('mongoose');
 mongoose.connect("mongodb://localhost:27017/SampleProductRequestDatabase");
 
 var sampleproductRequestsSchema = new mongoose.Schema({
-    emailId: String,
-    productId: String
+    customerName: String,
+    customerEmailId: String,
+    productTitle: String
 });
 
 var User = mongoose.model("User",sampleproductRequestsSchema);
@@ -40,6 +48,7 @@ app.post("/sampleProductRequest", (req, res) => {
     });
    });
 
-app.listen(port,()=>{
-    console.log("server is running on port "+port);
+
+   app.listen(port,function(){
+    console.log('server connected on port '+port);
 });
