@@ -67,11 +67,6 @@ app.get('/send',function(req,res){
                 "message":"sent"
              };
             console.log(response1);
-            // res.end(JSON.stringify(response1));
-            res.setHeader('Access-Control-Allow-Origin', '*');
-            res.set({
-                'Content-Type': 'text/plain',
-             })
             res.json({success : "Updated Successfully", status : 200}).end("sent");
         }
     });
