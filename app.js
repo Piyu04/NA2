@@ -51,25 +51,30 @@ app.get("/reqAccep",(req,res)=>{
 });
 
 app.get('/send',function(req,res){
-    User.find({},function(err,docs){
-        if(err) res.json(err);
-        else var mailOptions={
-            to : 'pgangrade1994@gmail.com',
-            subject : 'Sample product Request',
-            html : 'customer email Id :'+req.query.customerEmail+'  customer name :'+req.query.customerName+'   product Title : '+req.query.productTitle+'   Request Accept : '+res.redirect.accept
-        }
-        console.log(mailOptions);
-        smtpTransport.sendMail(mailOptions, function(error, response){
-            if(error){
-                console.log(error);
+    var mailOptions={
+        to : 'pgangrade1994@gmail.com',
+        subject : 'Sample product Request',
+        html : 'customer email Id :'+req.query.customerEmail+'  customer name :'+req.query.customerName+'   product Title : '+req.query.productTitle
+    }
+    console.log(mailOptions);
+    smtpTransport.sendMail(mailOptions, function(error, response){
+        if(error){
+            console.log(error);
             res.end("error");
-         }else{
-                console.log("Message sent: " + response.message);
-            res.end("sent");
-             }
+        }else{
+            //console.log("Message sent: " + response);
+            var response1 = {
+                "message":"sent"
+             };
+            console.log(response1);
+            // res.end(JSON.stringify(response1));
+            res.setHeader('Access-Control-Allow-Origin', '*');
+            res.set({
+                'Content-Type': 'text/plain',
+             })
+            res.json({success : "Updated Successfully", status : 200}).end("sent");
+        }
     });
-    });
-	
 });
 
 app.get('/list',function(req,res){
